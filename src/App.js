@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './TBBTLogo.svg';
 import pilot from './pilot.jpg';
 import './App.css';
@@ -17,7 +17,23 @@ import { alignPropType } from 'react-bootstrap/esm/types';
 
 function App() {
   const [apiData, setObj] = useState({});
+  var episode;
+
+  useEffect(() => {
+    fetch('https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt361642/bbt/episodes')
+    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .then(data => {
+      setObj(data);
+    })
+    .then(() => {
+      console.log(apiData);
+    });
+  }, []);
+  
   const onClick = () => {
+    
     fetch('https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt361642/bbt/episodes')
       .then(res => res.json())
       .then(data => {
@@ -29,6 +45,13 @@ function App() {
 
     console.log({ apiData });
     console.log("Clicked!")
+    episode = getEpisode(0);
+    console.log(episode);
+    
+  }
+  
+  const getEpisode = (index) => {
+    return apiData.data._embedded.episodes[index]
   }
 
   return (
@@ -36,7 +59,7 @@ function App() {
     <div className="App">
     <Container>
         <Row>
-          <Card style={{ width: '98vw' }}>
+          <Card style={{ width: '100vw' }}>
             <Card.Body>
               <Card.Title><h1>Big Bang Theory Episode Directory</h1></Card.Title>
               <img style={{width: '5em'}} src={logo} alt="Imagine Show Logo Here" />
@@ -57,10 +80,10 @@ function App() {
           </Col>
         
           <Col>
-            <Card style={{ }}>
+            <Card style={{}}>
               <Card.Body>
                 <Card.Title>
-                  <h4>Episode Title</h4>
+                  <h4>Title</h4>
                 </Card.Title>
                 <Card body>
                   Episode Information
