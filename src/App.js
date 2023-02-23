@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 import logo from './TBBTLogo.svg';
 import pilot from './pilot.jpg';
 import './App.css';
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { alignPropType } from 'react-bootstrap/esm/types';
 //npm install
-//npm install react-boostrap bootstrap
+//npm install react-bootstrap bootstrap
 //npm run start
 
 function App() {
-  const [apiData, setObj] = useState('Hello');
+  const [apiData, setObj] = useState({});
   const onClick = () => {
     fetch('https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt361642/bbt/episodes')
       .then(res => res.json())
@@ -26,29 +31,55 @@ function App() {
     console.log("Clicked!")
   }
 
-  /*
-  
-  */
-
   return (
-    <>
-      <div className="App">
+    
+    <div className="App">
+    <Container>
+        <Row>
+          <Card style={{ width: '98vw' }}>
+            <Card.Body>
+              <Card.Title><h1>Big Bang Theory Episode Directory</h1></Card.Title>
+              <img style={{width: '5em'}} src={logo} alt="Imagine Show Logo Here" />
+            </Card.Body>
+          <Button variant="primary" onClick={onClick} style={{ marginBottom: '2vh', marginLeft: 'auto', marginRight: 'auto'}}>Update Data</Button>
+          </Card>
+        </Row>
+        
+        <Row style={{ marginTop: '2vh'}}>
+          <Col xs={5}>
+            <Card style={{ width: '65'}}>
+              <Card.Body>
+                <Card.Title>
+                  <h4>Episode List</h4>
+                </Card.Title>
+              </Card.Body>
+            </Card>
+          </Col>
+        
+          <Col>
+            <Card style={{ }}>
+              <Card.Body>
+                <Card.Title>
+                  <h4>Episode Title</h4>
+                </Card.Title>
+                <Card body>
+                  Episode Information
+                </Card>
+                <Card.Text style={{marginTop: ' 2vh'}}>
+                  Episode Description
+                </Card.Text>
+              </Card.Body>
+              <Card.Img variant="bottom" src={pilot}/>
+            </Card>
+          </Col>
+        </Row>
 
-      <Card className='mx-auto' style={{ width: '50rem'}}>
-        <Card.Body>
-          <Card.Title>Big Bang Theory Episode Data</Card.Title>
-          <Card.Text>
-            Get it? Pilot episode?
-          </Card.Text>
-        </Card.Body>
-        <Card.Img variant="bottom" src={pilot}/>
-      </Card>
-      
-      <Button variant="primary" onClick={onClick}>Update Data</Button>
-      
+      </Container>
+
+
       </div>
 
-    </>
+    
   );
 }
 
