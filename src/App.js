@@ -17,37 +17,35 @@ import { alignPropType } from 'react-bootstrap/esm/types';
 
 function App() {
   const [apiData, setObj] = useState({});
-  var episode;
+  //var episode = {};
+
+  var episode = { "id":2913,
+                  "url":"http://www.tvmaze.com/episodes/2913/the-big-bang-theory-1x01-pilot",
+                  "name":"Pilot",
+                  "season":1,
+                  "number":1,
+                  "airdate":"2007-09-24",
+                  "airtime":"20:30",
+                  "airstamp":"2007-09-25T00:30:00+00:00",
+                  "runtime":30,
+                  "image":{"medium":"http://static.tvmaze.com/uploads/images/medium_landscape/4/12368.jpg",
+                  "original":"http://static.tvmaze.com/uploads/images/original_untouched/4/12368.jpg"},
+                  "summary":"<p>Is a comedy about brilliant physicists, Leonard and Sheldon, who are the kind of \"beautiful minds\" that understand how the universe works. But none of that genius helps them interact with people, especially women. All this begins to change when a free-spirited beauty named Penny moves in next door. Sheldon, Leonard's roommate, is quite content spending his nights playing Klingon Boggle with their socially dysfunctional friends, fellow Cal Tech scientists Wolowitz and Koothrappali. However, Leonard sees in Penny a whole new universe of possibilities... including love.</p>",
+                  "_links":{"self":{"href":"http://api.tvmaze.com/episodes/2913"}}};
 
   useEffect(() => {
     fetch('https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt361642/bbt/episodes')
-    .then(res => console.log(res))
     .then(res => res.json())
-    .then(data => console.log(data))
     .then(data => {
       setObj(data);
-    })
-    .then(() => {
-      console.log(apiData);
-    });
+      console.log("Fetched")})
+      
   }, []);
   
   const onClick = () => {
-    
-    fetch('https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt361642/bbt/episodes')
-      .then(res => res.json())
-      .then(data => {
-        setObj(data);
-      })
-      .then(() => {
-        console.log({ apiData });
-      });
-
-    console.log({ apiData });
-    console.log("Clicked!")
-    episode = getEpisode(0);
-    console.log(episode);
-    
+    episode = getEpisode(0)
+      console.log(episode)
+      console.log(episode.name)
   }
   
   const getEpisode = (index) => {
@@ -83,13 +81,13 @@ function App() {
             <Card style={{}}>
               <Card.Body>
                 <Card.Title>
-                  <h4>Title</h4>
+                  <h4>{episode.name}</h4>
                 </Card.Title>
                 <Card body>
-                  Episode Information
+                  Season: {episode.season}   Episode: {episode.number}   Aired: {episode.airdate}
                 </Card>
                 <Card.Text style={{marginTop: ' 2vh'}}>
-                  Episode Description
+                  <div dangerouslySetInnerHTML={{__html: episode.summary}} />
                 </Card.Text>
               </Card.Body>
               <Card.Img variant="bottom" src={pilot}/>
