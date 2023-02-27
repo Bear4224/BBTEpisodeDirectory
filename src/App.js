@@ -39,13 +39,14 @@ function App() {
     .then(data => {
       setObj(data);
       console.log("Fetched")})
-      
+    //episode = getEpisode(1)
+    //console.log(episode)
   }, []);
   
   const onClick = () => {
-    episode = getEpisode(0)
-      console.log(episode)
-      console.log(episode.name)
+    console.log(episode)
+    episode = getEpisode(1)
+    console.log(episode)
   }
   
   const getEpisode = (index) => {
@@ -76,7 +77,7 @@ function App() {
               </Card.Body>
             </Card>
           </Col>
-        
+          
           <Col>
             <Card style={{}}>
               <Card.Body>
@@ -84,7 +85,14 @@ function App() {
                   <h4>{episode.name}</h4>
                 </Card.Title>
                 <Card body>
-                  Season: {episode.season}   Episode: {episode.number}   Aired: {episode.airdate}
+                  <Container>
+                    <Row>
+                      <Col>Season: {episode.season}</Col>
+                      <Col>Episode: {episode.number}</Col>
+                      <Col>Aired: {episode.airdate}</Col>
+                      <Col>Length: {episode.airtime}</Col>
+                    </Row>
+                  </Container>
                 </Card>
                 <Card.Text style={{marginTop: ' 2vh'}}>
                   <div dangerouslySetInnerHTML={{__html: episode.summary}} />
