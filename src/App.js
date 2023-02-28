@@ -18,77 +18,84 @@ import { alignPropType } from 'react-bootstrap/esm/types';
 
 function App() {
   const [apiData, setObj] = useState([]);
-  const [episode, setEp] = useState({ "id":2913,
-                                      "url":"http://www.tvmaze.com/episodes/2913/the-big-bang-theory-1x01-pilot",
-                                      "name":"Pilot",
-                                      "season":1,
-                                      "number":1,
-                                      "airdate":"2007-09-24",
-                                      "airtime":"20:30",
-                                      "airstamp":"2007-09-25T00:30:00+00:00",
-                                      "runtime":30,
-                                      "image":{"medium":"http://static.tvmaze.com/uploads/images/medium_landscape/4/12368.jpg",
-                                      "original":"http://static.tvmaze.com/uploads/images/original_untouched/4/12368.jpg"},
-                                      "summary":"<p>Is a comedy about brilliant physicists, Leonard and Sheldon, who are the kind of \"beautiful minds\" that understand how the universe works. But none of that genius helps them interact with people, especially women. All this begins to change when a free-spirited beauty named Penny moves in next door. Sheldon, Leonard's roommate, is quite content spending his nights playing Klingon Boggle with their socially dysfunctional friends, fellow Cal Tech scientists Wolowitz and Koothrappali. However, Leonard sees in Penny a whole new universe of possibilities... including love.</p>",
-                                      "_links":{"self":{"href":"http://api.tvmaze.com/episodes/2913"}}
-                                    });
-  
+  const [episode, setEp] = useState({
+    "id": 2913,
+    "url": "http://www.tvmaze.com/episodes/2913/the-big-bang-theory-1x01-pilot",
+    "name": "Pilot",
+    "season": 1,
+    "number": 1,
+    "airdate": "2007-09-24",
+    "airtime": "20:30",
+    "airstamp": "2007-09-25T00:30:00+00:00",
+    "runtime": 30,
+    "image": {
+      "medium": "http://static.tvmaze.com/uploads/images/medium_landscape/4/12368.jpg",
+      "original": "http://static.tvmaze.com/uploads/images/original_untouched/4/12368.jpg"
+    },
+    "summary": "<p>Is a comedy about brilliant physicists, Leonard and Sheldon, who are the kind of \"beautiful minds\" that understand how the universe works. But none of that genius helps them interact with people, especially women. All this begins to change when a free-spirited beauty named Penny moves in next door. Sheldon, Leonard's roommate, is quite content spending his nights playing Klingon Boggle with their socially dysfunctional friends, fellow Cal Tech scientists Wolowitz and Koothrappali. However, Leonard sees in Penny a whole new universe of possibilities... including love.</p>",
+    "_links": { "self": { "href": "http://api.tvmaze.com/episodes/2913" } }
+  });
+
   useEffect(() => {
     fetch('https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt361642/bbt/episodes')
-    .then(res => res.json())
-    .then(data => {
-      const episodeList = data.data._embedded.episodes
-      setObj(episodeList);
-      console.log("Fetched")})
+      .then(res => res.json())
+      .then(data => {
+        const episodeList = data.data._embedded.episodes
+        setObj(episodeList);
+        console.log("Fetched")
+      })
     //episode = getEpisode(1)
     //console.log(episode)
   }, []);
-  
+
   const onClick = () => {
     console.log(episode)
     setEp(getEpisode(4))
     console.log(episode)
   }
-  
+
+  const listClick = () => {
+    console.log("clicked")
+  }
+
   const getEpisode = (index) => {
     return apiData[index]
   }
 
   return (
-    
+
     <div className="App">
-    <Container>
+      <Container>
         <Row>
           <Card style={{ width: '100vw' }}>
             <Card.Body>
               <Card.Title><h1>Big Bang Theory Episode Directory</h1></Card.Title>
-              <img style={{width: '5em'}} src={logo} alt="Show logo failed to load" />
+              <img style={{ width: '5em' }} src={logo} alt="Show logo failed to load" />
             </Card.Body>
-          <Button variant="primary" onClick={onClick} style={{ marginBottom: '2vh', marginLeft: 'auto', marginRight: 'auto'}}>Update Data</Button>
+            <Button variant="primary" onClick={onClick} style={{ marginBottom: '2vh', marginLeft: 'auto', marginRight: 'auto' }}>Update Data</Button>
           </Card>
         </Row>
 
 
 
-        <Row style={{ marginTop: '2vh'}}>
+        <Row style={{ marginTop: '2vh' }}>
           <Col xs={5}>
-            <Card style={{ width: '65'}}>
+            <Card style={{ width: '65' }}>
               <Card.Body className='listBody'>
                 <Card.Title>
                   <h4>Episode List</h4>
                 </Card.Title>
                 <div class='list-group'>
-                  <button type="button" class="list-group-item list group-item-action">1</button>
-                  <button type="button" class="list-group-item list group-item-action">2</button>
-                  <button type="button" class="list-group-item list group-item-action">3</button>
-                  <button type="button" class="list-group-item list group-item-action">4</button>
-                  <button type="button" class="list-group-item list group-item-action">5</button>
-                  <button type="button" class="list-group-item list group-item-action">6</button>
-                  <button type="button" class="list-group-item list group-item-action">7</button>
-                  <button type="button" class="list-group-item list group-item-action">8</button>
-                  <button type="button" class="list-group-item list group-item-action">9</button>
-                  <button type="button" class="list-group-item list group-item-action">10</button>
-                
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="1">1</button>
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="2">2</button>
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="3">3</button>
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="4">4</button>
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="5">5</button>
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="6">6</button>
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="7">7</button>
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="8">8</button>
+                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="9">9</button>
+
                 </div>
               </Card.Body>
             </Card>
@@ -112,11 +119,11 @@ function App() {
                     </Row>
                   </Container>
                 </Card>
-                <Card.Text style={{marginTop: ' 2vh'}}>
-                  <div dangerouslySetInnerHTML={{__html: episode.summary}} />
+                <Card.Text style={{ marginTop: ' 2vh' }}>
+                  <div dangerouslySetInnerHTML={{ __html: episode.summary }} />
                 </Card.Text>
               </Card.Body>
-              <Card.Img variant="bottom" src={episode.image.medium} alt="Episode image failed to load"/>
+              <Card.Img variant="bottom" src={episode.image.medium} alt="Episode image failed to load" />
             </Card>
           </Col>
         </Row>
@@ -124,27 +131,27 @@ function App() {
       </Container>
 
 
-      </div>
+    </div>
 
-    
+
   );
 }
 
-      /*
-        <div className="card">
-          <div className="card-body">
-            <div className="card-title">
-              <h1>Big Bang Theory Episode Directory <span class="align-middle"><img src={logo} alt="Imagine the show's logo here" /></span></h1>
-            </div>
-          </div>
-        </div>
+/*
+  <div className="card">
+    <div className="card-body">
+      <div className="card-title">
+        <h1>Big Bang Theory Episode Directory <span class="align-middle"><img src={logo} alt="Imagine the show's logo here" /></span></h1>
+      </div>
+    </div>
+  </div>
 
-        <div className="card" style="">
-          
-        </div>
+  <div className="card" style="">
+    
+  </div>
 
-      
-        <br></br>
-      */
+ 
+  <br></br>
+*/
 
 export default App;
