@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.list-group {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
 img {
   width: 1.5em;
   height: auto;

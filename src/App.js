@@ -62,23 +62,40 @@ function App() {
           <Card style={{ width: '100vw' }}>
             <Card.Body>
               <Card.Title><h1>Big Bang Theory Episode Directory</h1></Card.Title>
-              <img style={{width: '5em'}} src={logo} alt="Imagine Show Logo Here" />
+              <img style={{width: '5em'}} src={logo} alt="Show logo failed to load" />
             </Card.Body>
           <Button variant="primary" onClick={onClick} style={{ marginBottom: '2vh', marginLeft: 'auto', marginRight: 'auto'}}>Update Data</Button>
           </Card>
         </Row>
-        
+
+
+
         <Row style={{ marginTop: '2vh'}}>
           <Col xs={5}>
             <Card style={{ width: '65'}}>
-              <Card.Body>
+              <Card.Body className='listBody'>
                 <Card.Title>
                   <h4>Episode List</h4>
                 </Card.Title>
+                <div class='list-group'>
+                  <button type="button" class="list-group-item list group-item-action">1</button>
+                  <button type="button" class="list-group-item list group-item-action">2</button>
+                  <button type="button" class="list-group-item list group-item-action">3</button>
+                  <button type="button" class="list-group-item list group-item-action">4</button>
+                  <button type="button" class="list-group-item list group-item-action">5</button>
+                  <button type="button" class="list-group-item list group-item-action">6</button>
+                  <button type="button" class="list-group-item list group-item-action">7</button>
+                  <button type="button" class="list-group-item list group-item-action">8</button>
+                  <button type="button" class="list-group-item list group-item-action">9</button>
+                  <button type="button" class="list-group-item list group-item-action">10</button>
+                
+                </div>
               </Card.Body>
             </Card>
           </Col>
-          
+
+
+
           <Col>
             <Card style={{}}>
               <Card.Body>
@@ -99,7 +116,7 @@ function App() {
                   <div dangerouslySetInnerHTML={{__html: episode.summary}} />
                 </Card.Text>
               </Card.Body>
-              <Card.Img variant="bottom" src={episode.image.medium}/>
+              <Card.Img variant="bottom" src={episode.image.medium} alt="Episode image failed to load"/>
             </Card>
           </Col>
         </Row>
