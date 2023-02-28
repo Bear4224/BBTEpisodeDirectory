@@ -15,29 +15,30 @@ import { alignPropType } from 'react-bootstrap/esm/types';
 //npm install react-bootstrap bootstrap
 //npm run start
 
+
 function App() {
-  const [apiData, setObj] = useState({});
-  //var episode = {};
-
-  var episode = { "id":2913,
-                  "url":"http://www.tvmaze.com/episodes/2913/the-big-bang-theory-1x01-pilot",
-                  "name":"Pilot",
-                  "season":1,
-                  "number":1,
-                  "airdate":"2007-09-24",
-                  "airtime":"20:30",
-                  "airstamp":"2007-09-25T00:30:00+00:00",
-                  "runtime":30,
-                  "image":{"medium":"http://static.tvmaze.com/uploads/images/medium_landscape/4/12368.jpg",
-                  "original":"http://static.tvmaze.com/uploads/images/original_untouched/4/12368.jpg"},
-                  "summary":"<p>Is a comedy about brilliant physicists, Leonard and Sheldon, who are the kind of \"beautiful minds\" that understand how the universe works. But none of that genius helps them interact with people, especially women. All this begins to change when a free-spirited beauty named Penny moves in next door. Sheldon, Leonard's roommate, is quite content spending his nights playing Klingon Boggle with their socially dysfunctional friends, fellow Cal Tech scientists Wolowitz and Koothrappali. However, Leonard sees in Penny a whole new universe of possibilities... including love.</p>",
-                  "_links":{"self":{"href":"http://api.tvmaze.com/episodes/2913"}}};
-
+  const [apiData, setObj] = useState([]);
+  const [episode, setEp] = useState({ "id":2913,
+                                      "url":"http://www.tvmaze.com/episodes/2913/the-big-bang-theory-1x01-pilot",
+                                      "name":"Pilot",
+                                      "season":1,
+                                      "number":1,
+                                      "airdate":"2007-09-24",
+                                      "airtime":"20:30",
+                                      "airstamp":"2007-09-25T00:30:00+00:00",
+                                      "runtime":30,
+                                      "image":{"medium":"http://static.tvmaze.com/uploads/images/medium_landscape/4/12368.jpg",
+                                      "original":"http://static.tvmaze.com/uploads/images/original_untouched/4/12368.jpg"},
+                                      "summary":"<p>Is a comedy about brilliant physicists, Leonard and Sheldon, who are the kind of \"beautiful minds\" that understand how the universe works. But none of that genius helps them interact with people, especially women. All this begins to change when a free-spirited beauty named Penny moves in next door. Sheldon, Leonard's roommate, is quite content spending his nights playing Klingon Boggle with their socially dysfunctional friends, fellow Cal Tech scientists Wolowitz and Koothrappali. However, Leonard sees in Penny a whole new universe of possibilities... including love.</p>",
+                                      "_links":{"self":{"href":"http://api.tvmaze.com/episodes/2913"}}
+                                    });
+  
   useEffect(() => {
     fetch('https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt361642/bbt/episodes')
     .then(res => res.json())
     .then(data => {
-      setObj(data);
+      const episodeList = data.data._embedded.episodes
+      setObj(episodeList);
       console.log("Fetched")})
     //episode = getEpisode(1)
     //console.log(episode)
@@ -45,12 +46,12 @@ function App() {
   
   const onClick = () => {
     console.log(episode)
-    episode = getEpisode(1)
+    setEp(getEpisode(4))
     console.log(episode)
   }
   
   const getEpisode = (index) => {
-    return apiData.data._embedded.episodes[index]
+    return apiData[index]
   }
 
   return (
@@ -98,7 +99,7 @@ function App() {
                   <div dangerouslySetInnerHTML={{__html: episode.summary}} />
                 </Card.Text>
               </Card.Body>
-              <Card.Img variant="bottom" src={pilot}/>
+              <Card.Img variant="bottom" src={episode.image.medium}/>
             </Card>
           </Col>
         </Row>
