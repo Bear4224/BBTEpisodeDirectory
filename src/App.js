@@ -88,11 +88,15 @@ function App() {
                 <Card.Title>
                   <h4>Episode List</h4>
                 </Card.Title>
-                <div class='list-group'>
-                  <ListGroup.Item action onClick={listClick} data-index="1">1</ListGroup.Item>
-                  <ListGroup.Item action onClick={listClick} data-index="2">2</ListGroup.Item>
-                  <ListGroup.Item action onClick={listClick} data-index="3">3</ListGroup.Item>
-                </div>
+                <ListGroup style={{ 'max-height': '60vh', 'overflow-y': 'auto', textAlign:'left'}} as="ul">
+                  {apiData.map(
+                    (ep, i) => (
+                      <ListGroup.Item action onClick={listClick} data-index={i} key={i}>
+                        S{ep.season} E{ep.number} {ep.name} {ep.airdate}
+                      </ListGroup.Item>
+                    )
+                  )}                  
+                </ListGroup>
               </Card.Body>
             </Card>
           </Col>
