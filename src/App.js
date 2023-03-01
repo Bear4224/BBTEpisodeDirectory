@@ -11,6 +11,7 @@ import Col from 'react-bootstrap/Col';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { alignPropType } from 'react-bootstrap/esm/types';
+import { ListGroup } from 'react-bootstrap';
 //npm install
 //npm install react-bootstrap bootstrap
 //npm run start
@@ -50,12 +51,14 @@ function App() {
 
   const onClick = () => {
     console.log(episode)
-    setEp(getEpisode(4))
+    setEp(getEpisode(9))
     console.log(episode)
   }
 
-  const listClick = () => {
+  const listClick = (e) => {
     console.log("clicked")
+    console.log(e.currentTarget.dataset.index)
+    setEp(getEpisode(e.currentTarget.dataset.index))
   }
 
   const getEpisode = (index) => {
@@ -86,16 +89,9 @@ function App() {
                   <h4>Episode List</h4>
                 </Card.Title>
                 <div class='list-group'>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="1">1</button>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="2">2</button>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="3">3</button>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="4">4</button>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="5">5</button>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="6">6</button>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="7">7</button>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="8">8</button>
-                  <button type="button" onClick={listClick} class="list-group-item list group-item-action" index="9">9</button>
-
+                  <ListGroup.Item action onClick={listClick} data-index="1">1</ListGroup.Item>
+                  <ListGroup.Item action onClick={listClick} data-index="2">2</ListGroup.Item>
+                  <ListGroup.Item action onClick={listClick} data-index="3">3</ListGroup.Item>
                 </div>
               </Card.Body>
             </Card>
