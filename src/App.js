@@ -8,6 +8,7 @@ import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { alignPropType } from 'react-bootstrap/esm/types';
@@ -43,26 +44,15 @@ function App() {
       .then(data => {
         const episodeList = data.data._embedded.episodes
         setObj(episodeList);
-        console.log("Fetched")
       })
-    //episode = getEpisode(1)
-    //console.log(episode)
   }, []);
 
-  const onClick = () => {
-    console.log(episode)
-    setEp(getEpisode(9))
-    console.log(episode)
-  }
-
   const listClick = (e) => {
-    console.log("clicked")
-    console.log(e.currentTarget.dataset.index)
-    setEp(getEpisode(e.currentTarget.dataset.index))
+    setEp(apiData[e.currentTarget.dataset.index])
   }
 
-  const getEpisode = (index) => {
-    return apiData[index]
+  const seasClick = (e) => {
+    console.log(e.currentTarget.dataset.season)
   }
 
   return (
@@ -75,8 +65,27 @@ function App() {
               <Card.Title><h1>Big Bang Theory Episode Directory</h1></Card.Title>
               <img style={{ width: '5em' }} src={logo} alt="Show logo failed to load" />
             </Card.Body>
-            <Button variant="primary" onClick={onClick} style={{ marginBottom: '2vh', marginLeft: 'auto', marginRight: 'auto' }}>Update Data</Button>
           </Card>
+        </Row>
+
+
+
+        <Row>
+          Season:
+          <ButtonGroup>
+            <Button onClick={seasClick} data-season='1'>1</Button>
+            <Button onClick={seasClick} data-season='2'>2</Button>
+            <Button onClick={seasClick} data-season='3'>3</Button>
+            <Button onClick={seasClick} data-season='4'>4</Button>
+            <Button onClick={seasClick} data-season='5'>5</Button>
+            <Button onClick={seasClick} data-season='6'>6</Button>
+            <Button onClick={seasClick} data-season='7'>7</Button>
+            <Button onClick={seasClick} data-season='8'>8</Button>
+            <Button onClick={seasClick} data-season='9'>9</Button>
+            <Button onClick={seasClick} data-season='10'>10</Button>
+            <Button onClick={seasClick} data-season='11'>11</Button>
+            <Button onClick={seasClick} data-season='12'>12</Button>
+          </ButtonGroup>
         </Row>
 
 
@@ -88,7 +97,7 @@ function App() {
                 <Card.Title>
                   <h4>Episode List</h4>
                 </Card.Title>
-                <ListGroup style={{ 'max-height': '60vh', 'overflow-y': 'auto', textAlign:'left'}} as="ul">
+                <ListGroup style={{ maxHeight: '60vh', overflowY: 'auto', textAlign:'left'}} as="ul">
                   {apiData.map(
                     (ep, i) => (
                       <ListGroup.Item action onClick={listClick} data-index={i} key={i}>
