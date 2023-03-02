@@ -37,7 +37,6 @@ function App() {
     "summary": "<p>Is a comedy about brilliant physicists, Leonard and Sheldon, who are the kind of \"beautiful minds\" that understand how the universe works. But none of that genius helps them interact with people, especially women. All this begins to change when a free-spirited beauty named Penny moves in next door. Sheldon, Leonard's roommate, is quite content spending his nights playing Klingon Boggle with their socially dysfunctional friends, fellow Cal Tech scientists Wolowitz and Koothrappali. However, Leonard sees in Penny a whole new universe of possibilities... including love.</p>",
     "_links": { "self": { "href": "http://api.tvmaze.com/episodes/2913" } }
   });
-  const [season, setSe] = useState(1);
 
   useEffect(() => {
     fetch('https://us-central1-big-bang-theory-25fd5.cloudfunctions.net/bbt361642/bbt/episodes')
@@ -54,8 +53,6 @@ function App() {
 
   const seasClick = (e) => {
     console.log(e.currentTarget.dataset.season)
-    setSe(parseInt(e.currentTarget.dataset.season))
-    console.log(season)
   }
 
   return (
@@ -73,26 +70,6 @@ function App() {
 
 
 
-        <Row>
-          Season:
-          <ButtonGroup>
-            <Button onClick={seasClick} data-season='1'>1</Button>
-            <Button onClick={seasClick} data-season='2'>2</Button>
-            <Button onClick={seasClick} data-season='3'>3</Button>
-            <Button onClick={seasClick} data-season='4'>4</Button>
-            <Button onClick={seasClick} data-season='5'>5</Button>
-            <Button onClick={seasClick} data-season='6'>6</Button>
-            <Button onClick={seasClick} data-season='7'>7</Button>
-            <Button onClick={seasClick} data-season='8'>8</Button>
-            <Button onClick={seasClick} data-season='9'>9</Button>
-            <Button onClick={seasClick} data-season='10'>10</Button>
-            <Button onClick={seasClick} data-season='11'>11</Button>
-            <Button onClick={seasClick} data-season='12'>12</Button>
-          </ButtonGroup>
-        </Row>
-
-
-
         <Row style={{ marginTop: '2vh' }}>
           <Col xs={5}>
             <Card style={{ width: '65' }}>
@@ -101,9 +78,9 @@ function App() {
                   <h4>Episode List</h4>
                 </Card.Title>
                 <ListGroup style={{ maxHeight: '60vh', overflowY: 'auto', textAlign:'left'}} as="ul">
-                  {apiData.filter(ep => ep.season === season).map(
+                  {apiData.map(
                     (ep, i) => (
-                      <ListGroup.Item action onClick={listClick} data-index={i} key={i} data-se={ep.season} data-ep={ep.number}>
+                      <ListGroup.Item action onClick={listClick} data-index={i} key={i}>
                         S{ep.season} E{ep.number} {ep.name} {ep.airdate}
                       </ListGroup.Item>
                     )
